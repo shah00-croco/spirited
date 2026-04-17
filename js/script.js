@@ -8,16 +8,90 @@ let activeCategory = 'all';
 let activeType = 'all';
 
 // ============================================================
-// Load Products from JSON
+// Products Data (inline fallback — works with file:// and server)
+// ============================================================
+const PRODUCTS_DATA = [
+    {
+        "id": 1,
+        "name": "ECHIGO IGARASHIGAWA\nDAIGINJO - GENSHU",
+        "category": "NAGAHAMA",
+        "type": "WHISKEY",
+        "image": "assets/images/bottles/product_ECHIGO IGARASHIGAWA DAIGINJO - GENSHU 1.png",
+        "salePrice": 245.00,
+        "originalPrice": 659.00,
+        "badge": "10%",
+        "inStock": true
+    },
+    {
+        "id": 2,
+        "name": "ECHIGO IGARASHIGAWA\nDAIGINJO",
+        "category": "NAGAHAMA",
+        "type": "WHISKEY",
+        "image": "assets/images/bottles/product_ECHIGO IGARASHIGAWA DAIGINJO 1.png",
+        "salePrice": 162.00,
+        "originalPrice": 659.00,
+        "badge": "10%",
+        "inStock": true
+    },
+    {
+        "id": 3,
+        "name": "FAR EAST OF PEAT\n6th BATCH",
+        "category": "FAR EAST OF PEAT",
+        "type": "WHISKEY",
+        "image": "assets/images/bottles/product_FAR EAST OF PEAT 6th BATCH 1.png",
+        "salePrice": 502.00,
+        "originalPrice": 659.00,
+        "badge": "10%",
+        "inStock": true
+    },
+    {
+        "id": 4,
+        "name": "AMAHAGAN WORLD MALT\nEDITION 3",
+        "category": "AMAHAGAN",
+        "type": "WHISKEY",
+        "image": "assets/images/bottles/product_AMAHAGAN WORLD MALT EDITION 3 1.png",
+        "salePrice": 423.00,
+        "originalPrice": 659.00,
+        "badge": "10%",
+        "inStock": true
+    },
+    {
+        "id": 5,
+        "name": "AMAHAGAN WORLD MALT\nEDITION 2",
+        "category": "AMAHAGAN",
+        "type": "WHISKEY",
+        "image": "assets/images/bottles/product_AMAHAGAN WORLD MALT EDITION 2 1.png",
+        "salePrice": 490.50,
+        "originalPrice": 659.00,
+        "badge": "10%",
+        "inStock": true
+    },
+    {
+        "id": 6,
+        "name": "AMAHAGAN WORLD MALT\nEDITION 1",
+        "category": "AMAHAGAN",
+        "type": "WHISKEY",
+        "image": "assets/images/bottles/product_AMAHAGAN WORLD MALT EDITION 1 1.png",
+        "salePrice": 396.40,
+        "originalPrice": 659.00,
+        "badge": "10%",
+        "inStock": true
+    }
+];
+
+// ============================================================
+// Load Products (tries fetch first, falls back to inline data)
 // ============================================================
 async function loadProducts() {
     try {
         const res = await fetch('data/products.json');
+        if (!res.ok) throw new Error('fetch failed');
         allProducts = await res.json();
-        renderProducts();
     } catch (e) {
-        console.error('Failed to load products.json:', e);
+        // Fallback to inline data (works with file:// protocol)
+        allProducts = PRODUCTS_DATA;
     }
+    renderProducts();
 }
 
 // ============================================================
