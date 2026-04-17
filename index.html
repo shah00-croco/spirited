@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spirit - Premium Liquor Store | Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body data-page="home">
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero" id="home">
+            <div class="hero-overlay"></div>
+            <button class="hero-arrow hero-arrow-prev"><i class="fas fa-chevron-left"></i></button>
+            <div class="hero-content">
+                <p class="hero-subtitle">HOT SUMMER</p>
+                <h1 class="hero-title">SPIRIT</h1>
+                <button class="hero-btn">EXLORE MORE</button>
+            </div>
+            <button class="hero-arrow hero-arrow-next"><i class="fas fa-chevron-right"></i></button>
+        </section>
+
+    <!-- Magazine Section -->
+    <section class="magazine-section">
+        <div class="container">
+            <div class="magazine-content">
+                <div class="magazine-image-wrapper">
+                    <div class="magazine-image">
+                        <img src="assets/images/assets_image/story img-21.png" alt="Spirit Magazine">
+                    </div>
+                </div>
+                <div class="magazine-text">
+                    <h2>"HONORING THE TRADITION.<br>EMBRACING THE FUTURE."</h2>
+                    <p>Welcome to Spirited, where every bottle tells a story of passion, heritage, and unparalleled craftsmanship.</p>
+                    <p>Our mission is to bridge the rich tradition of Japan's finest distilleries with Malaysia's growing appreciation for premium spirits.</p>
+                    <p>Whether you're a novice exploring your first sip of sake or a connoisseur seeking the finest whisky, we are here to offer you an authentic and elevated experience.</p>
+                    <p>Discover the stories behind each bottle and savor the experience.</p>
+                    <button class="read-more-btn">EXPLORE OUR COLLECTION</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hot Summer Section -->
+    <section class="hot-summer-section">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">TASTE FOR YOUR LIFE</p>
+                <h2 class="section-title">OUR BEST SPIRIT</h2>
+            </div>
+            
+            <div class="products-layout">
+                <!-- Sidebar - Product Categories -->
+                <aside class="product-sidebar">
+                    <h3 class="sidebar-title">PRODUCT<br>CATEGORIES</h3>
+                    <div class="category-list">
+                        <div class="category-item has-dropdown active open" data-filter="WHISKEY">WHISKEY</div>
+                        <div class="category-sub-list show">
+                            <div class="category-item sub-item" data-filter="NAGAHAMA">NAGAHAMA</div>
+                            <div class="category-item sub-item" data-filter="AMAHAGAN">AMAHAGAN</div>
+                            <div class="category-item sub-item" data-filter="SABUROMARU">SABUROMARU</div>
+                            <div class="category-item sub-item" data-filter="FAR EAST OF PEAT">FAR EAST OF PEAT</div>
+                        </div>
+                        <div class="category-item" data-filter="SAKE">SAKE</div>
+                        <div class="category-item" data-filter="GIN">GIN</div>
+                    </div>
+                </aside>
+
+                <!-- Main Products Area -->
+                <div class="products-main">
+                    <!-- Filter Bar -->
+                    <div class="filter-bar">
+                        <div class="filter-left">
+                            <div class="filter-item">
+                                <label>Availability</label>
+                                <select>
+                                    <option>All Products</option>
+                                    <option>In Stock</option>
+                                    <option>Out of Stock</option>
+                                </select>
+                            </div>
+                            <div class="filter-item">
+                                <label>Price</label>
+                                <select>
+                                    <option>All Prices</option>
+                                    <option>Price: Low to High</option>
+                                    <option>Price: High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="pagination-controls">
+                            <span class="page-info">1/3</span>
+                            <button class="pagination-btn prev" disabled><i class="fas fa-chevron-left"></i></button>
+                            <button class="pagination-btn next"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Products Grid (populated by script.js from data/products.json) -->
+                    <div class="products-grid"></div>
+                    
+                    <!-- Find Out More Button -->
+                    <div class="find-more-wrapper">
+                        <button class="find-more-btn">FIND OUT MORE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <script src="js/layout.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

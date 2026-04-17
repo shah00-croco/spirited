@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spirit - Premium Liquor Store</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+                        <a href="index.html">
+                            <img src="assets/logo/logo-spirited.svg" alt="Spirited Logo">
+                        </a>
+                    </div>
+                    <div class="nav-menu-container">
+                        <ul class="nav-menu">
+                            <li><a href="index.html" data-page="home">HOME</a></li>
+                            <li><a href="about.html" data-page="about">ABOUT US</a></li>
+                            <li class="dropdown">
+                                <a href="brand.html" data-page="brand">BRAND <i class="fas fa-chevron-down"></i></a>
+                            </li>
+                            <li><a href="shop.html" class="shop-btn" data-page="shop">SHOP</a></li>
+                            <li><a href="contact.html" data-page="contact">CONTACT US</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav-icons">
+                        <div class="cart-icon" id="cart-toggle">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-badge" id="cart-badge">0</span>
+                        </div>
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="SEARCH">
+                        </div>
+                    </div>
+                    <!-- Cart Dropdown -->
+                    <div class="cart-dropdown" id="cart-dropdown">
+                        <div class="cart-dropdown-body" id="cart-dropdown-body">
+                            <p class="cart-empty-msg">Your cart is empty</p>
+                        </div>
+                        <div class="cart-dropdown-footer" id="cart-dropdown-footer" style="display:none;">
+                            <div class="cart-total-row">
+                                <span>Total:</span>
+                                <span id="cart-total">RM 0.00</span>
+                            </div>
+                            <button class="cart-checkout-btn">CHECKOUT</button>
+                        </div>
+                        <button class="cart-start-shopping-btn" id="cart-start-shopping">START SHOPPING</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
