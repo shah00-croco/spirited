@@ -1,0 +1,45 @@
+[
+    {
+        "id": "nagahama",
+        "name": "NAGAHAMA DISTILLERY",
+        "heroTitle": "NAGAHAMA\nDISTILLERY",
+        "icon": "assets/svg/distillery-icon.svg",
+        "mainImage": "assets/images/brands/nagahama-distillery-1.jpg",
+        "storyText": "The Nagahama brewery is located in the north shore of Lake Biwa. In 2016 having utilized the long years of old Japanese sake making techniques, Nagahama distillery installed a unique whiskey still and crafted a unique high quality whiskey. They aim for a soft smooth quality unique high quality whiskey that tastes of rice.",
+        "detailImages": [
+            "assets/images/brands/nagahama-detail-1.jpg",
+            "assets/images/brands/nagahama-detail-2.jpg",
+            "assets/images/brands/nagahama-detail-3.jpg"
+        ],
+        "detailText": "The Nagahama brewery is located in the north shore of Lake Biwa. In 2016 having utilized the long years of old Japanese sake making techniques, Nagahama distillery installed a unique whiskey still and crafted a unique high quality whiskey. They aim for a soft smooth quality unique high quality whiskey that tastes of rice.",
+        "landscapeImage": "assets/images/brands/nagahama-landscape.jpg",
+        "landscapeText": "BUILT AT THE SHORES OF LAKE BIWA IN JULY, located at the northern shores bicentennial history Sugihara Sake Brewery has produced sake and shochu using the soft water of Lake Biwa. As we embark to the Japanese whisky business journey, we have made full use of our sake-making technology to challenge the \"soft and smooth whisky\"",
+        "category": "NAGAHAMA"
+    },
+    {
+        "id": "kaikyo",
+        "name": "KAIKYO DISTILLERY",
+        "heroTitle": "KAIKYO\nDISTILLERY",
+        "icon": "assets/svg/distillery-icon.svg",
+        "mainImage": "assets/images/brands/kaikyo-distillery-1.jpg",
+        "storyText": "Kaikyo Distillery is renowned for its exceptional sake production, combining traditional Japanese brewing techniques with modern innovation. Located in a region blessed with pure mountain water, the distillery has been crafting premium sake for generations, earning recognition both domestically and internationally.",
+        "detailImages": [],
+        "detailText": "",
+        "landscapeImage": "",
+        "landscapeText": "",
+        "category": "KAIKYO"
+    },
+    {
+        "id": "saburomaru",
+        "name": "SABUROMARU DISTILLERY",
+        "heroTitle": "SABUROMARU\nDISTILLERY",
+        "icon": "assets/svg/distillery-icon.svg",
+        "mainImage": "assets/images/brands/saburomaru-distillery-1.jpg",
+        "storyText": "Saburomaru Distillery specializes in premium gin production, blending traditional botanicals with unique Japanese ingredients. With a commitment to quality and craftsmanship, the distillery creates distinctive spirits that capture the essence of Japanese gin-making artistry.",
+        "detailImages": [],
+        "detailText": "",
+        "landscapeImage": "",
+        "landscapeText": "",
+        "category": "SABUROMARU"
+    }
+]
