@@ -237,7 +237,7 @@ img {
     left: 50%;
     transform: translateX(-50%);
     background-color: transparent;
-    min-width: 500px;
+    min-width: 250px;
     padding: 0;
     opacity: 0;
     visibility: hidden;
@@ -256,44 +256,70 @@ img {
     transform: rotate(180deg);
 }
 
-.brand-dropdown-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.brand-item {
+    position: relative;
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-.brand-dropdown-row:last-child {
+.brand-item:last-child {
     border-bottom: none;
 }
 
 .brand-category {
-    background-color: #043C54;
-    color: #fff;
-    padding: 20px 30px;
-    font-size: 0.85rem;
+    background-color: #fff;
+    color: #043C54;
+    padding: 12px 20px;
+    font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     display: flex;
     align-items: center;
-    border-right: 1px solid rgba(255,255,255,0.1);
     border-radius: 0 !important;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.brand-category:hover {
+    background-color: #065570;
+    color: #fff;
+}
+
+.brand-submenu {
+    position: absolute;
+    left: 100%;
+    top: 0;
+    background-color: #fff;
+    min-width: 200px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1001;
+}
+
+.brand-item.has-submenu:hover .brand-submenu {
+    opacity: 1;
+    visibility: visible;
 }
 
 .brand-name {
-    background-color: #f5f5f5;
+    background-color: #fff;
     color: #333;
-    padding: 20px 30px;
-    font-size: 0.85rem;
+    padding: 12px 20px;
+    font-size: 0.75rem;
     font-weight: 500;
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
+    letter-spacing: 1.5px;
+    display: block;
     transition: background-color 0.3s, color 0.3s;
     border-radius: 0 !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.brand-name:last-child {
+    border-bottom: none;
 }
 
 .brand-name:hover {
-    background-color: #2a7d8f;
+    background-color: #065570;
     color: #fff;
 }
 
@@ -2031,13 +2057,7 @@ img {
     }
     
     .brand-dropdown-menu {
-        min-width: 500px;
-    }
-    
-    .brand-category,
-    .brand-name {
-        padding: 25px 30px;
-        font-size: 0.9rem;
+        min-width: 250px;
     }
 }
 
@@ -2157,13 +2177,6 @@ img {
     
     .brand-dropdown-row {
         grid-template-columns: 1fr;
-    }
-    
-    .brand-category,
-    .brand-name {
-        padding: 18px 25px;
-        font-size: 0.85rem;
-        border-right: none;
     }
     
     .why-choose-cards {
