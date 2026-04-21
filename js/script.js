@@ -4,47 +4,33 @@
 function hidePreloader() {
     const preloader = document.getElementById('preloader');
     if (preloader) {
-        preloader.classList.add('hidden');
+        // Initialize lazy loading before hiding preloader
+        initLazyLoad();
+        
+        // Small delay to let initial images start loading
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+        }, 100);
     }
 }
 
 // Hide preloader once everything is loaded
 window.addEventListener('load', () => {
-    setTimeout(hidePreloader, 300);
+    setTimeout(hidePreloader, 400);
 });
 
 // Fallback: hide after 4s even if something stalls
 setTimeout(hidePreloader, 4000);
 
 // ============================================================
-// Lazy Loading Images
+// Lazy Loading Images (Disabled for performance)
 // ============================================================
 function initLazyLoad() {
+    // Simply mark all images as loaded immediately
     const images = document.querySelectorAll('img');
-    if (!images.length) return;
-
-    if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    if (img.dataset.src) {
-                        img.src = img.dataset.src;
-                    }
-                    img.classList.add('loaded');
-                    obs.unobserve(img);
-                }
-            });
-        }, { rootMargin: '100px' });
-
-        images.forEach(img => {
-            img.classList.add('lazy');
-            observer.observe(img);
-        });
-    } else {
-        // Fallback for old browsers
-        images.forEach(img => img.classList.add('loaded'));
-    }
+    images.forEach(img => {
+        img.classList.add('loaded');
+    });
 }
 
 // ============================================================
@@ -55,6 +41,8 @@ let currentPage = 1;
 const PRODUCTS_PER_PAGE = 6;
 let activeCategory = 'all';
 let activeType = 'all';
+let renderedCards = new Map(); // Cache of all rendered product cards
+let isInitialRender = true; // Track if this is the first render
 
 // ============================================================
 // Products Data (inline fallback — works with file:// and server)
@@ -165,42 +153,125 @@ function renderProducts() {
     const start     = (currentPage - 1) * PRODUCTS_PER_PAGE;
     const paginated = filtered.slice(start, start + PRODUCTS_PER_PAGE);
 
-    grid.innerHTML = paginated.map(p => `
-        <div class="product-card" data-id="${p.id}">
-            <div class="product-badge">${p.badge || '10%'}</div>
-            <div class="product-image">
-                <img src="${p.image}" alt="${p.name.replace(/\n/g, ' ')}">
-            </div>
-            <h3 class="product-name">${p.name.replace(/\n/g, '<br>')}</h3>
-            <div class="product-price">
-                <span class="sale-price">RM ${p.salePrice.toFixed(2)}</span>
-                <span class="original-price">RM ${p.originalPrice.toFixed(2)}</span>
-            </div>
-            <div class="quantity-control">
-                <button class="qty-btn minus">-</button>
-                <input type="number" value="1" min="1" max="99">
-                <button class="qty-btn plus">+</button>
-                <button class="add-to-cart-btn" data-id="${p.id}">ADD TO CART</button>
-            </div>
-            <button class="read-more-btn">READ MORE</button>
-        </div>
-    `).join('');
+    // FIRST TIME: Build all product cards once
+    if (isInitialRender) {
+        const loadingElement = grid.querySelector('.products-loading');
+        if (loadingElement) {
+            loadingElement.classList.remove('hidden');
+        }
 
-    // Update pagination UI
+        // Build ALL products at once (only happens once)
+        requestAnimationFrame(() => {
+            buildAllProductCards(grid, () => {
+                // After building, show only the current page
+                updateVisibleProducts(paginated);
+                
+                if (loadingElement) {
+                    loadingElement.classList.add('hidden');
+                }
+                
+                updatePaginationUI(currentPage, totalPages);
+                isInitialRender = false;
+            });
+        });
+    } else {
+        // SUBSEQUENT CALLS: Just show/hide existing cards (NO RE-RENDERING)
+        updateVisibleProducts(paginated);
+        updatePaginationUI(currentPage, totalPages);
+    }
+}
+
+// Build all product cards ONCE and cache them
+function buildAllProductCards(grid, onComplete) {
+    const BATCH_SIZE = 3; // Build 3 at a time
+    let index = 0;
+
+    function buildBatch() {
+        const batch = allProducts.slice(index, index + BATCH_SIZE);
+        const fragment = document.createDocumentFragment();
+        
+        batch.forEach(product => {
+            // Skip if already rendered
+            if (renderedCards.has(product.id)) return;
+
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            card.dataset.id = product.id;
+            card.dataset.category = product.category;
+            card.dataset.type = product.type;
+            card.style.display = 'none'; // Hidden by default
+            
+            card.innerHTML = `
+                <div class="product-badge">${product.badge || '10%'}</div>
+                <div class="product-image">
+                    <img class="loaded" src="${product.image}" alt="${product.name.replace(/\n/g, ' ')}">
+                </div>
+                <h3 class="product-name">${product.name.replace(/\n/g, '<br>')}</h3>
+                <div class="product-price">
+                    <span class="sale-price">RM ${product.salePrice.toFixed(2)}</span>
+                    <span class="original-price">RM ${product.originalPrice.toFixed(2)}</span>
+                </div>
+                <div class="quantity-control">
+                    <button class="qty-btn minus">-</button>
+                    <input type="number" value="1" min="1" max="99">
+                    <button class="qty-btn plus">+</button>
+                    <button class="add-to-cart-btn" data-id="${product.id}">ADD TO CART</button>
+                </div>
+                <button class="read-more-btn">READ MORE</button>
+            `;
+            
+            bindProductCardEvents(card);
+            fragment.appendChild(card);
+            renderedCards.set(product.id, card);
+        });
+
+        grid.appendChild(fragment);
+        index += BATCH_SIZE;
+
+        if (index < allProducts.length) {
+            requestAnimationFrame(buildBatch);
+        } else {
+            if (onComplete) onComplete();
+        }
+    }
+
+    buildBatch();
+}
+
+// Show/Hide products based on current filter/pagination (NO RE-RENDERING)
+function updateVisibleProducts(productsToShow) {
+    const showIds = new Set(productsToShow.map(p => p.id));
+    
+    // Hide all cards first
+    renderedCards.forEach((card, id) => {
+        card.style.display = 'none';
+    });
+    
+    // Show only the cards for current page
+    showIds.forEach(id => {
+        const card = renderedCards.get(id);
+        if (card) {
+            card.style.display = 'block';
+        }
+    });
+}
+
+// Update pagination UI
+function updatePaginationUI(currentPage, totalPages) {
     const pageInfo = document.querySelector('.page-info');
     const prevBtn  = document.querySelector('.pagination-btn.prev');
     const nextBtn  = document.querySelector('.pagination-btn.next');
+    
     if (pageInfo) pageInfo.textContent = `${currentPage}/${totalPages}`;
     if (prevBtn)  prevBtn.disabled = currentPage === 1;
     if (nextBtn)  nextBtn.disabled = currentPage >= totalPages;
-
-    bindProductEvents();
-    initLazyLoad();
 }
 
-function bindProductEvents() {
+// Bind events to a single product card
+function bindProductCardEvents(card) {
     // Quantity buttons
-    document.querySelectorAll('.qty-btn').forEach(btn => {
+    const qtyBtns = card.querySelectorAll('.qty-btn');
+    qtyBtns.forEach(btn => {
         btn.addEventListener('click', function () {
             const input = this.parentElement.querySelector('input[type="number"]');
             let val = parseInt(input.value) || 1;
@@ -210,8 +281,9 @@ function bindProductEvents() {
     });
 
     // Add to cart
-    document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
-        btn.addEventListener('click', function () {
+    const addToCartBtn = card.querySelector('.add-to-cart-btn');
+    if (addToCartBtn) {
+        addToCartBtn.addEventListener('click', function () {
             const id      = parseInt(this.dataset.id);
             const product = allProducts.find(p => p.id === id);
             const qty     = parseInt(this.closest('.product-card').querySelector('input[type="number"]').value) || 1;
@@ -223,7 +295,7 @@ function bindProductEvents() {
                 this.style.backgroundColor = '';
             }, 1500);
         });
-    });
+    }
 }
 
 // ============================================================

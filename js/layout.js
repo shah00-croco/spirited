@@ -36,20 +36,30 @@ function setActiveMenuItem() {
 
 // Initialize navbar scroll effect
 function initScrollEffect() {
+    let ticking = false;
+    
     window.addEventListener('scroll', function() {
-        const navbar = document.querySelector('.navbar');
-        const navContainer = document.querySelector('.nav-container');
-        
-        if (navbar && navContainer) {
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-                navContainer.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-                navContainer.classList.remove('scrolled');
-            }
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                const navbar = document.querySelector('.navbar');
+                const navContainer = document.querySelector('.nav-container');
+                
+                if (navbar && navContainer) {
+                    if (window.scrollY > 50) {
+                        navbar.classList.add('scrolled');
+                        navContainer.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                        navContainer.classList.remove('scrolled');
+                    }
+                }
+                
+                ticking = false;
+            });
+            
+            ticking = true;
         }
-    });
+    }, { passive: true });
 }
 
 // Call loadIncludes when DOM is ready
