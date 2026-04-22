@@ -10,7 +10,27 @@ function hidePreloader() {
         // Small delay to let initial images start loading
         setTimeout(() => {
             preloader.classList.add('hidden');
+            // Show age gate modal after preloader
+            showAgeGateIfNeeded();
         }, 100);
+    }
+}
+
+// Show age gate modal if not verified
+function showAgeGateIfNeeded() {
+    const ageGateModal = document.getElementById('age-gate-modal');
+    if (!ageGateModal) return;
+    
+    const isVerified = localStorage.getItem('ageVerified');
+    
+    if (isVerified !== 'true') {
+        // Show the modal
+        setTimeout(() => {
+            ageGateModal.classList.add('show');
+        }, 200);
+    } else {
+        // Already verified, enable scroll
+        document.body.classList.remove('no-scroll');
     }
 }
 

@@ -62,9 +62,46 @@ function initScrollEffect() {
     }, { passive: true });
 }
 
+// Age Gate Functionality
+function initAgeGate() {
+    const ageGateModal = document.getElementById('age-gate-modal');
+    const ageConfirm = document.getElementById('age-confirm');
+    const termsConfirm = document.getElementById('terms-confirm');
+    const enterBtn = document.getElementById('age-gate-enter');
+    
+    if (!ageGateModal) return;
+    
+    // Check both checkboxes to enable button
+    function checkVerification() {
+        if (ageConfirm && termsConfirm && enterBtn) {
+            enterBtn.disabled = !(ageConfirm.checked && termsConfirm.checked);
+        }
+    }
+    
+    if (ageConfirm) ageConfirm.addEventListener('change', checkVerification);
+    if (termsConfirm) termsConfirm.addEventListener('change', checkVerification);
+    
+    // Handle enter button click
+    if (enterBtn) {
+        enterBtn.addEventListener('click', function() {
+            if (ageConfirm.checked && termsConfirm.checked) {
+                localStorage.setItem('ageVerified', 'true');
+                ageGateModal.classList.remove('show');
+                ageGateModal.classList.add('hidden');
+                // Enable scroll after entering
+                document.body.classList.remove('no-scroll');
+            }
+        });
+    }
+}
+
 // Call loadIncludes when DOM is ready
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadIncludes);
+    document.addEventListener('DOMContentLoaded', function() {
+        loadIncludes();
+        initAgeGate();
+    });
 } else {
     loadIncludes();
+    initAgeGate();
 }

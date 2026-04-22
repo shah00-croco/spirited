@@ -1,6 +1,162 @@
 @import url('https://fonts.cdnfonts.com/css/aesthetic-beauty-cf');
 
 /* ============================================================
+   Age Verification Modal
+   ============================================================ */
+.age-gate-modal {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.age-gate-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.age-gate-modal.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+body.no-scroll {
+    overflow: hidden;
+    height: 100vh;
+}
+
+.age-gate-content {
+    background-color: #f5f0e8;
+    padding: 60px 80px;
+    border-radius: 20px;
+    max-width: 540px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+}
+
+.age-gate-logo {
+    margin-bottom: 30px;
+}
+
+.age-gate-logo img {
+    width: 120px;
+    height: auto;
+}
+
+.age-gate-title {
+    font-size: 1.6rem;
+    color: #333;
+    margin-bottom: 40px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+.age-gate-checkboxes {
+    background-color: #e8e3d9;
+    padding: 30px 25px;
+    border-radius: 12px;
+    margin-bottom: 30px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.age-gate-checkbox {
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    position: relative;
+    padding-left: 35px;
+    user-select: none;
+}
+
+.age-gate-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    left: 0;
+    top: 2px;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 2px solid #043C54;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.age-gate-checkbox:hover .checkmark {
+    background-color: #f9f9f9;
+}
+
+.age-gate-checkbox input:checked ~ .checkmark {
+    background-color: #043C54;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.age-gate-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-text {
+    font-size: 0.9rem;
+    color: #333;
+    line-height: 1.4;
+}
+
+.age-gate-btn {
+    background-color: #043C54;
+    color: #fff;
+    border: none;
+    padding: 14px 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.age-gate-btn:hover:not(:disabled) {
+    background-color: #065570;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(4, 60, 84, 0.3);
+}
+
+.age-gate-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+/* ============================================================
    Preloader
    ============================================================ */
 #preloader {
@@ -1535,6 +1691,203 @@ img {
     left: 58.5%;
 }
 
+/* ============================================================
+   Contact Page
+   ============================================================ */
+/* Contact Hero */
+.contact-hero {
+    height: 60vh;
+    min-height: 400px;
+    position: relative;
+    background: url('../assets/images/backgrounds/cover-05.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.contact-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.contact-hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.contact-hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    letter-spacing: 0.3rem;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+}
+
+.contact-hero-text {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    letter-spacing: 1px;
+    opacity: 0.95;
+}
+
+/* Contact Form Section */
+.contact-form-section {
+    padding: 80px 0;
+    background-color: #f9f9f9;
+}
+
+.contact-section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    margin-bottom: 50px;
+    text-align: left;
+    color: #333;
+}
+
+.contact-form-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 60px;
+    align-items: start;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.contact-input,
+.contact-textarea {
+    padding: 15px 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+    background-color: #fff;
+}
+
+.contact-input:focus,
+.contact-textarea:focus {
+    outline: none;
+    border-color: #043C54;
+}
+
+.contact-textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.contact-submit-btn {
+    background-color: #043C54;
+    color: #fff;
+    border: none;
+    padding: 15px 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    align-self: flex-start;
+}
+
+.contact-submit-btn:hover {
+    background-color: #065570;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(4, 60, 84, 0.3);
+}
+
+.contact-form-image {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    min-height: 400px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-form-image img {
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    transform: scale(1.1);
+}
+
+/* Contact Info Cards */
+.contact-info-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.contact-info-card {
+    background-color: #b8a67a;
+    padding: 40px 30px;
+    border-radius: 12px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.contact-info-card i {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    opacity: 0.9;
+}
+
+.contact-info-card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+
+.contact-info-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    opacity: 0.95;
+}
+
+.contact-info-card:last-child {
+    background-color: #4a4a4a;
+}
+
+/* Contact Map Section */
+.contact-map-section {
+    width: 100%;
+    height: 450px;
+}
+
+.contact-map-section iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
 /* Brand Page */
 .brand-hero {
     height: 100vh;
@@ -2059,6 +2412,10 @@ img {
     .brand-dropdown-menu {
         min-width: 250px;
     }
+    
+    .contact-form-section {
+        padding: 60px 30px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -2219,5 +2576,64 @@ img {
     
     .brand-story-title {
         font-size: 1.3rem;
+    }
+    
+    /* Age Gate Modal responsive */
+    .age-gate-content {
+        padding: 40px 30px;
+        width: 95%;
+    }
+    
+    .age-gate-logo img {
+        width: 80px;
+    }
+    
+    .age-gate-title {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+    }
+    
+    .age-gate-checkboxes {
+        padding: 20px 15px;
+    }
+    
+    .checkbox-text {
+        font-size: 0.85rem;
+    }
+    
+    .age-gate-btn {
+        padding: 12px 40px;
+        font-size: 0.9rem;
+    }
+    
+    /* Contact page responsive */
+    .contact-hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .contact-hero-text {
+        font-size: 0.85rem;
+    }
+    
+    .contact-form-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    
+    .contact-form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-info-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-form-section {
+        padding: 50px 20px;
+    }
+    
+    .contact-section-title {
+        font-size: 1.5rem;
+        margin-bottom: 30px;
     }
 }

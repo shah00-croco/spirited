@@ -7,7 +7,30 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body data-page="contact">
+<body data-page="contact" class="no-scroll">
+    <!-- Age Verification Modal -->
+    <div id="age-gate-modal" class="age-gate-modal">
+        <div class="age-gate-content">
+            <div class="age-gate-logo">
+                <img src="assets/logo/logo-spirited-blue.svg" alt="Spirited Logo">
+            </div>
+            <h2 class="age-gate-title">You must be of legal drinking age<br>to enter this site.</h2>
+            <div class="age-gate-checkboxes">
+                <label class="age-gate-checkbox">
+                    <input type="checkbox" id="age-confirm">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-text">I confirm that I am 21 years old or above and a non-Muslim</span>
+                </label>
+                <label class="age-gate-checkbox">
+                    <input type="checkbox" id="terms-confirm">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-text">I agree to the Terms & Conditions, Privacy Policy, and Cookie Policy</span>
+                </label>
+            </div>
+            <button id="age-gate-enter" class="age-gate-btn" disabled>ENTER</button>
+        </div>
+    </div>
+
     <!-- Preloader -->
     <div id="preloader">
         <div class="preloader-inner">
@@ -21,18 +44,61 @@
 
     <!-- Main Content -->
     <main>
-        <section class="page-hero">
-            <div class="container">
-                <h1>Contact Us</h1>
-                <p>Get in touch with us</p>
+        <!-- Contact Hero -->
+        <section class="contact-hero">
+            <div class="contact-hero-overlay"></div>
+            <div class="contact-hero-content">
+                <h1 class="contact-hero-title">GET IN TOUCH</h1>
+                <p class="contact-hero-text">HAVE QUESTIONS ABOUT OUR PRODUCTS,<br>WANT TO MAKE A SALE, OR PLACE AN ORDER?<br>OUR TEAM IS HERE TO HELP.</p>
             </div>
         </section>
 
-        <section class="contact-content">
+        <!-- Contact Form Section -->
+        <section class="contact-form-section">
             <div class="container">
-                <h2>Contact Information</h2>
-                <p>Content coming soon...</p>
+                <h2 class="contact-section-title">CONTACT FORM</h2>
+                <div class="contact-form-layout">
+                    <form class="contact-form">
+                        <div class="contact-form-row">
+                            <input type="email" placeholder="Email" class="contact-input" required>
+                            <input type="tel" placeholder="Phone" class="contact-input" required>
+                        </div>
+                        <input type="text" placeholder="Name" class="contact-input" required>
+                        <textarea placeholder="Message" class="contact-textarea" rows="6" required></textarea>
+                        <button type="submit" class="contact-submit-btn">Submit</button>
+                    </form>
+                    <div class="contact-form-image">
+                        <img src="assets/images/assets_image/story img-20.png" alt="Contact">
+                    </div>
+                </div>
+
+                <!-- Contact Info Cards -->
+                <div class="contact-info-cards">
+                    <div class="contact-info-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>info@spirited.com.my</h3>
+                        <p>Have a question? We're here to help.<br>Write to us and expect a reply soon.</p>
+                    </div>
+                    <div class="contact-info-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Address</h3>
+                        <p>G-03A, ClickAsia Sdn. Bhd., Bandar Seri<br>Emporia Kota Damansara, Area Damasara,<br>47810 Petaling Jaya, Selangor</p>
+                    </div>
+                </div>
             </div>
+        </section>
+
+        <!-- Map Section -->
+        <section class="contact-map-section">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3983.6894444444445!2d101.5847!3d3.1686!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMTAnMDcuMSJOIDEwMcKwMzUnMDQuOSJF!5e0!3m2!1sen!2smy!4v1234567890" 
+                width="100%" 
+                height="450" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
         </section>
     </main>
 

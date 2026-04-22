@@ -7,7 +7,30 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body data-page="home">
+<body data-page="home" class="no-scroll">
+    <!-- Age Verification Modal -->
+    <div id="age-gate-modal" class="age-gate-modal">
+        <div class="age-gate-content">
+            <div class="age-gate-logo">
+                <img src="assets/logo/logo-spirited-blue.svg" alt="Spirited Logo">
+            </div>
+            <h2 class="age-gate-title">You must be of legal drinking age<br>to enter this site.</h2>
+            <div class="age-gate-checkboxes">
+                <label class="age-gate-checkbox">
+                    <input type="checkbox" id="age-confirm">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-text">I confirm that I am 21 years old or above and a non-Muslim</span>
+                </label>
+                <label class="age-gate-checkbox">
+                    <input type="checkbox" id="terms-confirm">
+                    <span class="checkmark"></span>
+                    <span class="checkbox-text">I agree to the Terms & Conditions, Privacy Policy, and Cookie Policy</span>
+                </label>
+            </div>
+            <button id="age-gate-enter" class="age-gate-btn" disabled>ENTER</button>
+        </div>
+    </div>
+
     <!-- Preloader -->
     <div id="preloader">
         <div class="preloader-inner">
